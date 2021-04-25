@@ -10,7 +10,7 @@ export const fetcher = async <T>(params: {
     [key: string]: string | number;
 }): Promise<T> => {
     // Those values should go to .env file, but for just reacruitment app it's faster to handle deployments etc.
-    const urlBase = 'http://www.omdbapi.com';
+    const urlBase = 'https://www.omdbapi.com';
     const apikey = 'b508fc3';
 
     const response = await fetch(
