@@ -1,12 +1,18 @@
 import React from 'react';
-import { Input, Label, SearchFormWrapper, Submit } from './styles';
+import { Input, SearchFormWrapper } from './styles';
 
-export const SearchForm = () => {
+interface SearchFormProps {
+    value?: string | number;
+    setValue: (value: string | number) => void;
+}
+export const SearchForm = ({ setValue, value }: SearchFormProps) => {
     return (
         <SearchFormWrapper>
-            <Label>Search title</Label>
-            <Input placeholder={'eg. Pulp Fiction'} />
-            <Submit />
+            <Input
+                placeholder={'Start typing to run search'}
+                defaultValue={value}
+                onChange={(e) => setValue(e.target.value)}
+            />
         </SearchFormWrapper>
     );
 };
