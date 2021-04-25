@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ArticleWrapper = styled.article`
     display: flex;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: var(--generalBorder);
     border-radius: var(--borderRadius);
     padding: var(--generalSpacing);
 `;

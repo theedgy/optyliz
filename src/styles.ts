@@ -18,6 +18,7 @@ export const GlobalStyle = createGlobalStyle`
    
    --borderRadius: 10px;
    --generalSpacing: 15px;
+   --generalBorder: 1px solid rgba(0, 0, 0, 0.2);
  }
 `;
 
