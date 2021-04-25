@@ -6,12 +6,18 @@ import { fetcher } from '../../services/fetcher';
 import { SearchItem, SearchResponse } from '../../services/apiTypes';
 import { Skeleton } from '../../components/Skeleton';
 import { useDebounce } from '../../services/useDebounce';
+import { Pagination } from '../../components/Pagnation';
+
+// This values is not changable and it comes from API settings; Used to calculate last page for pagination
+const postsPerPage = 10;
 
 export const Search = () => {
     const [results, setResults] = useState<SearchItem[]>([]);
     const [isLoading, setLoading] = useState(false);
     const [isError, setError] = useState<string | false>(false);
     const [inputValue, setInputValue] = useState<string | number>('');
+    const [currentPage, setPage] = useState<number>(1);
+    const [totalResults, setTotalResults] = useState(0);
 
     const debouncedValue = useDebounce<string | number>(inputValue, 500);
 
@@ -20,6 +26,13 @@ export const Search = () => {
         if (!debouncedValue) {
             setResults([]);
             setError(false);
+        }
+    }, [debouncedValue]);
+
+    // Reset page to 1 whenever input is reused
+    useEffect(() => {
+        if (debouncedValue) {
+            setPage(1);
         }
     }, [debouncedValue]);
 
@@ -36,6 +49,7 @@ export const Search = () => {
         // Fetching
         fetcher<SearchResponse>({
             s: debouncedValue,
+            page: currentPage,
         }).then((response) => {
             // Add resutls to state
             if (response.Response === 'True') {
@@ -50,10 +64,13 @@ export const Search = () => {
                 }
             }
 
+            // Set results for pagination counting
+            setTotalResults(parseInt(response.totalResults, 10) || 0);
+
             // Remove loading state on query finish
             setLoading(false);
         });
-    }, [debouncedValue]);
+    }, [debouncedValue, currentPage]);
 
     return (
         <Wrapper>
@@ -63,7 +80,32 @@ export const Search = () => {
 
             {isError && <Notice>{isError}</Notice>}
 
-            {results.length > 0 && <List items={results} />}
+            {results.length > 0 && (
+                <>
+                    <List items={results} />
+
+                    <Pagination
+                        currentPage={currentPage}
+                        lastPage={
+                            totalResults <=
+                            (currentPage - 1) * postsPerPage + results.length
+                        }
+                        onPageChange={(dir) =>
+                            setPage((prev) => {
+                                if (dir === 'next') {
+                                    return prev + 1;
+                                }
+
+                                if (dir === 'prev' && prev > 1) {
+                                    return prev - 1;
+                                }
+
+                                return 1;
+                            })
+                        }
+                    />
+                </>
+            )}
         </Wrapper>
     );
 };
