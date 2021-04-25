@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/optyliz/static/js/main.c7e63641.chunk.js",
-    "main.js.map": "/optyliz/static/js/main.c7e63641.chunk.js.map",
+    "main.js": "/optyliz/static/js/main.8122b8cb.chunk.js",
+    "main.js.map": "/optyliz/static/js/main.8122b8cb.chunk.js.map",
     "runtime-main.js": "/optyliz/static/js/runtime-main.b692e5f0.js",
     "runtime-main.js.map": "/optyliz/static/js/runtime-main.b692e5f0.js.map",
     "static/js/2.2f0e306a.chunk.js": "/optyliz/static/js/2.2f0e306a.chunk.js",
@@ -15,6 +15,6 @@
   "entrypoints": [
     "static/js/runtime-main.b692e5f0.js",
     "static/js/2.2f0e306a.chunk.js",
-    "static/js/main.c7e63641.chunk.js"
+    "static/js/main.8122b8cb.chunk.js"
   ]
 }
