@@ -14,5 +14,5 @@ export const Input = styled.input`
     border-bottom: 2px solid #000;
     font-size: 20px;
     padding: 0 var(--generalSpacing);
-    border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+    border-radius: 0;
 `;
