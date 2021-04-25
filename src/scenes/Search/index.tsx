@@ -84,26 +84,29 @@ export const Search = () => {
                 <>
                     <List items={results} />
 
-                    <Pagination
-                        currentPage={currentPage}
-                        lastPage={
-                            totalResults <=
-                            (currentPage - 1) * postsPerPage + results.length
-                        }
-                        onPageChange={(dir) =>
-                            setPage((prev) => {
-                                if (dir === 'next') {
-                                    return prev + 1;
-                                }
+                    {totalResults && totalResults > postsPerPage && (
+                        <Pagination
+                            currentPage={currentPage}
+                            lastPage={
+                                totalResults <=
+                                (currentPage - 1) * postsPerPage +
+                                    results.length
+                            }
+                            onPageChange={(dir) =>
+                                setPage((prev) => {
+                                    if (dir === 'next') {
+                                        return prev + 1;
+                                    }
 
-                                if (dir === 'prev' && prev > 1) {
-                                    return prev - 1;
-                                }
+                                    if (dir === 'prev' && prev > 1) {
+                                        return prev - 1;
+                                    }
 
-                                return 1;
-                            })
-                        }
-                    />
+                                    return 1;
+                                })
+                            }
+                        />
+                    )}
                 </>
             )}
         </Wrapper>
